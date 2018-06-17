@@ -12,6 +12,7 @@ export class Patient{
     PhoneNumber:string;
     IsAdmitted:boolean;
     Age:number;
+    Gender:String;
     
     constructor(){
         this.FirstName = "";
@@ -28,7 +29,9 @@ export class Patient{
         this.Age = 0;
     }
 
-    createPateint(FirstName:string,LastName:string,MiddleName:string,Address:string,DateOfAdmission:Date,DateOfDischarge:Date,HistoryOf:string,AdmitedFor:string,Treatment:string,PhoneNumber:string,IsAdmitted:boolean,Age:number){
+    createPateint(FirstName:string,LastName:string,MiddleName:string,Address:string,
+        DateOfAdmission:Date,DateOfDischarge:Date,HistoryOf:string,AdmitedFor:string,
+        Treatment:string,PhoneNumber:string,IsAdmitted:boolean,Age:number,Gender:string){
         this.FirstName = FirstName;
         this.LastName = LastName;
         this.MiddleName = MiddleName;
@@ -41,6 +44,8 @@ export class Patient{
         this.PhoneNumber = String(PhoneNumber);
         this.IsAdmitted = IsAdmitted;
         this.Age = Age;
+        this.Gender = Gender;
+
     }
 
 }

@@ -22,10 +22,17 @@ const PatientSchema = new Schema({
         type:String,
         default:"None"
     },
-    AdmitedFor:{
-        type:String,
-        required:[true,'Details of admission missing']
-    },
+    AdmitedFor:[{
+        AdmittedFor:{
+            type : String,
+            required :[true,'Enter Diagnosis before discharge']
+        },
+        AdmittedOn:
+        {
+            type:Date,
+            required:[true, "No Diagnosis date found"]
+        }
+    }],
     Treatment:[{
         TreatmentGiven:{
             type : String,
