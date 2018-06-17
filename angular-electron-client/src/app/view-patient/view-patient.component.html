@@ -1,0 +1,109 @@
+<div class="container-fluid">
+
+    <form>
+      <br>
+      <div class="form-row">
+        <!--Search Field-->
+          <div class="form-group input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Search</span>
+              </div>
+              <input type="text" class="form-control" [(ngModel)]="selectedPatient" [ngbTypeahead]="search" name="searchPatient"
+                     [resultFormatter]="patientResultFormatter" [inputFormatter]="patientInputFormatter" (selectItem)="selectedItem($event)">
+            </div>
+      </div>
+      <div class="form-row">
+          <label>Patient Name:</label>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" placeholder="First name" [(ngModel)]="displayPatient.FirstName" name="FirstName">
+        </div>
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" placeholder="Middle name" [(ngModel)]="displayPatient.MiddleName" name="MiddleName">
+        </div>
+        <div class="form-group col-md-4">
+          <input type="text" class="form-control" placeholder="Last name" [(ngModel)]="displayPatient.LastName" name="LastName">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label for="patientAge">Age</label>
+          <input type="number" id="patientAge" class="form-control" placeholder="Age" [(ngModel)]="displayPatient.Age" name="Age">
+        </div>
+        <div class="form-group col-md-3">
+          <label for="patientAge">Phone number</label>
+          <input type="tel" class="form-control" placeholder="Phone number" [(ngModel)]="displayPatient.PhoneNumber" name="PhoneNumber">
+        </div>
+        <!--Drop Down for date of admissions-->
+
+        <div class="form-group col-md-3">
+            <div ngbDropdown class="d-inline-block">
+              <label for="dropdownBasic1">Date Of Admission</label>
+              <button type="button" class="btn btn-primary" dis>Latest Date</button>
+              <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+                <div class="dropdown-menu"  ngbDropdownMenu>
+                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfAdmission">{{doa}}</button>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <!--Drop Down for date of discharge-->
+        <div class="form-group col-md-3">
+            <div ngbDropdown class="d-inline-block">
+              <label for="dropdownBasic2">Date Of Discharge</label>
+              <button type="button" class="btn btn-primary" dis>Latest Date</button>
+              <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+                <div class="dropdown-menu"  ngbDropdownMenu>
+                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge" >{{doa}}</button>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text">Address</span>
+            </div>
+            <textarea class="form-control" col="90" row="2" [(ngModel)]="displayPatient.Address" name="Address"></textarea>
+          </div>
+      </div>
+      <hr>
+      <div class="form-row">
+        <h5>Medical Information</h5>
+      </div>
+      <div class="form-row">
+          <div class="form-group input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+              <span class="input-group-text">History Of </span>
+            </div>
+            <textarea class="form-control" col="90" row="2" [(ngModel)]="displayPatient.HistoryOf" name="HistoryOf"></textarea>
+          </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+              <span class="input-group-text">Diagnosis</span>
+            </div>
+            <textarea class="form-control" col="90" row="4" [(ngModel)]="displayPatient.AdmitedFor" name="AdmitedFor"></textarea>
+          </div>
+      </div>
+      <div class="form-row">
+          <div class="form-group input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+              <span class="input-group-text">Treatment</span>
+            </div>
+            <textarea class="form-control" col="90" row="8" [(ngModel)]="displayPatient.Treatment" name="Treatment"></textarea>
+          </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <button type="button" class="form-control btn btn-primary">ADMIT PATIENT</button>
+        </div>
+      </div>
+    </form>
+  </div>

@@ -1,0 +1,18 @@
+
+.vl {
+    border-left: 6px solid rgb(6, 0, 87);
+    height: 500px;
+}
+
+.myjumbotron {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background-color: #abe5f7c9;
+    border-radius: 0.3rem;
+  }
+  
+  @media (min-width: 576px) {
+    .myjumbotron {
+      padding: 2rem 1rem;
+    }
+  }

@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <form>
+    <div class="form-row">
+        <label>Patient Name:</label>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <input type="text" class="form-control" [(ngModel)]= "newPatient.FirstName" name = "FirstName" placeholder="First name" required>
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text" class="form-control" [(ngModel)]= "newPatient.MiddleName" name = "MiddleName" placeholder="Middle name">
+      </div>
+      <div class="form-group col-md-4">
+        <input type="text" class="form-control" [(ngModel)]= "newPatient.LastName" name = "LastName" placeholder="Last name" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="patientAge">Age</label>
+        <input type="number" id="patientAge" class="form-control" [(ngModel)]= "newPatient.Age" name = "Age" placeholder="Age" required>
+      </div>
+      <div class="form-group col-md-4">
+          <label for="patientAge">Phone number</label>
+        <input type="tel" class="form-control" [(ngModel)]= "newPatient.PhoneNumber" name = "PhoneNumber" placeholder="Phone number" required>
+      </div>
+    </div>
+    <div class="form-row">
+        <div class="input-group">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Address</span>
+          </div>
+          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.Address" name = "Address" required></textarea>
+        </div>
+    </div>
+    <hr>
+    <div class="form-row">
+      <h5>Medical Information</h5>
+    </div>
+    <div class="form-row">
+        <div class="form-group input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text">History Of </span>
+          </div>
+          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.HistoryOf" name = "HistoryOf"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Diagnosis</span>
+          </div>
+          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.AdmitedFor" name = "AdmitedFor"></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group input-group input-group-sm mb-3">
+            <div class="input-group-prepend">
+            <span class="input-group-text">Treatment</span>
+          </div>
+          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.Treatment" name = "Treatment" ></textarea>
+        </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <button type="button" class="form-control btn btn-primary" (click) = "addPatientToDB()" >ADMIT PATIENT</button>
+      </div>
+    </div>
+  </form>
+</div>

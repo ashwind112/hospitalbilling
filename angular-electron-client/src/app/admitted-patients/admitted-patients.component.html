@@ -1,0 +1,25 @@
+
+<ngb-alert *ngIf="alert" [type]="alert.type">{{ alert.message }}</ngb-alert>
+
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Date Of Admission</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let patient of admittedPatients; let i = index">
+        <th scope="row">{{i+1}}</th>
+        <td> {{ patient.FirstName }} </td>
+        <td> {{ patient.LastName }} </td>
+        <td> {{ patient.DatesOfAdmission[patient.DatesOfAdmission.length-1] }} </td>
+        <td>
+            <a href="#" (click)="dischargePatient(patient)">Discharge</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
