@@ -44,5 +44,5 @@ var patientToAdmit = new patient();
 
 //listen on port 4000
 app.listen(process.env.port || 4000, function(){
-    console.log("Server Started");
+    console.log("Server Started at port 4000");
 });

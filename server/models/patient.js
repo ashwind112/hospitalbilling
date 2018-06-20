@@ -25,23 +25,19 @@ const PatientSchema = new Schema({
     AdmitedFor:[{
         AdmittedFor:{
             type : String,
-            required :[true,'Enter Diagnosis before discharge']
         },
         AdmittedOn:
         {
             type:Date,
-            required:[true, "No Diagnosis date found"]
         }
     }],
     Treatment:[{
         TreatmentGiven:{
             type : String,
-            required :[true,'Enter treatment before discharge']
         },
         TreatmentGivenOn:
         {
             type:Date,
-            required:[true, "No treatment date found"]
         }
     }],
     PhoneNumber:{

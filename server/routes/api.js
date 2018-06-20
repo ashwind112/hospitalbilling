@@ -76,7 +76,7 @@ router.get('/getPatientById', function(req, res,next){
 
 
 router.post('/addPatient', function(req, res, next){
-
+    console.log(req.body);
     Patient.create(req.body).then(function(patient){
         res.send(patient);
     }).catch(next);
