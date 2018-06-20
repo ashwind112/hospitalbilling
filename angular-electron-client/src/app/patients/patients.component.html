@@ -8,40 +8,41 @@
         <input type="text" class="form-control" [(ngModel)]= "newPatient.FirstName" name = "FirstName" placeholder="First name" required>
       </div>
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" [(ngModel)]= "newPatient.MiddleName" 
+        <input type="text" class="form-control" [(ngModel)]= "newPatient.MiddleName"
         name = "MiddleName" placeholder="Middle name">
       </div>
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" [(ngModel)]= "newPatient.LastName" 
+        <input type="text" class="form-control" [(ngModel)]= "newPatient.LastName"
         name = "LastName" placeholder="Last name" required>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="patientAge">Age</label>
-        <input type="number" id="patientAge" class="form-control" [(ngModel)]= "newPatient.Age" 
+        <input type="number" id="patientAge" class="form-control" [(ngModel)]= "newPatient.Age"
         name = "Age" placeholder="Age" required>
       </div>
       <div class="form-group col-md-4">
           <label for="patientAge">Phone number</label>
-        <input type="tel" class="form-control" [(ngModel)]= "newPatient.PhoneNumber" 
+        <input type="tel" class="form-control" [(ngModel)]= "newPatient.PhoneNumber"
         name = "PhoneNumber" placeholder="Phone number" required>
       </div>
       <div class="form-group col-md-4">
-        <label for="patientGender">Gender</label>
+        <label > Gender </label>
         <div class="input-group">
+
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="Male" value="option1">
-            <label class="form-check-label" for="Male">
-              Male
-            </label>
+
+            <input class="form-check-input" type="radio" name="maleRadio" id="Male" value="Male"
+                   [(ngModel)] = "newPatient.Gender">
+            <label class="form-check-label" for="Male">Male</label>
           </div>
-          <br>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="exampleRadios" id="Male" value="option1">
-            <label class="form-check-label" for="Female">
-              Female
-            </label>
+
+            <input class="form-check-input" type="radio" name="femaleRadio" id="Female" value="Female"
+                   [(ngModel)] = "newPatient.Gender">
+            <label class="form-check-label" for="Female">Female</label>
+
           </div>
         </div>
       </div>
@@ -71,7 +72,7 @@
             <div class="input-group-prepend">
             <span class="input-group-text">Diagnosis</span>
           </div>
-          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.AdmitedFor" name = "AdmitedFor"></textarea>
+          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.AdmitedFor.AddmitedFor" name = "AdmitedFor"></textarea>
         </div>
     </div>
     <div class="form-row">
@@ -79,7 +80,7 @@
             <div class="input-group-prepend">
             <span class="input-group-text">Treatment</span>
           </div>
-          <textarea class="form-control" col="90" row="2" [(ngModel)]= "newPatient.Treatment" name = "Treatment" ></textarea>
+          <textarea class="form-control" col="90" row="4" [(ngModel)]= "newPatient.Treatment.TreatmentGiven" name = "Treatment" ></textarea>
         </div>
     </div>
     <div class="form-row">

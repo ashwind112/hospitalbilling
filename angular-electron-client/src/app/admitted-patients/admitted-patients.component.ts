@@ -11,34 +11,61 @@ import {and} from '@angular/router/src/utils/collection';
 })
 export class AdmittedPatientsComponent implements OnInit {
 
+  alert:IAlert;
   admittedPatients: Patient[];
-  alert: IAlert;
+  closed:boolean;
+  public alerts: Array<IAlert> = [];
   interval: any;
 
   constructor(private patientUtilityService: PatientUtilityService) { }
 
   ngOnInit() {
+    this.closed = true;
     this.patientUtilityService.getAdmittedPatients().subscribe((patients) => {
       this.admittedPatients = patients;
     });
-
+    this.alerts.push({
+      id:1,
+      type:"success",
+      message:"Patient Discharged successfully."
+    },{
+        id:2,
+        type:"danger",
+        message: "Please make sure patient information is filled completely"
+    });
     this.interval = setInterval(() => {
       this.refreshData();
     }, 3000);
 
   }
-  dischargePatient(patient) {
-    if ( patient.HistoryOf.length === 0 && patient.Treatment.length === 0 && patient.AdmitedFor.length === 0) {
-      alert({id: 1, message: 'Patient does not have required information', type: 'danger'});
+
+  dischargePatient(patient):void {
+
+
+    if ( patient.HistoryOf.length === 0 || patient.Treatment.TreatmentGiven.length === 0 ||
+        patient.AdmitedFor.AddmitedFor.length === 0)
+    {
+      if(this.closed)
+        this.closed = false;
+      alert("Failed to update");
+      this.alert=this.alerts[1];
+      return;
     }
-    patient.IsAdmitted = false;
-    this.patientUtilityService.updatePatient(patient._id, patient).subscribe((patientUpdated) => {
-    if (patientUpdated) {
-      console.log('patient discharged' + patientUpdated );
+    else {
+      patient.IsAdmitted = false;
+      this.patientUtilityService.updatePatient(patient._id, patient).subscribe((patientUpdated) => {
+        if (patientUpdated) {
+          console.log('patient discharged' + patientUpdated);
+        }
+      });
+      console.log(patient);
     }
-    });
-    console.log(patient);
   }
+
+  public closeAlert(alert: IAlert) {
+    this.closed = true;
+  }
+
   refreshData() {
 
     this.patientUtilityService.getAdmittedPatients().subscribe((patients) => {

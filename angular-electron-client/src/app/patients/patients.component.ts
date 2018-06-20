@@ -16,14 +16,14 @@ export class PatientsComponent implements OnInit {
   patientsData:Patient[];
 
   constructor(private patientUtilityService:PatientUtilityService ) { }
-  
+
   ngOnInit() {
     this.newPatient = new Patient();
-    
+
     this.patientUtilityService.getPatients().subscribe((patients) => {
       this.patientsData = patients
     } );
-    
+
   }
 
   addPatientToDB():void{
@@ -38,5 +38,9 @@ export class PatientsComponent implements OnInit {
         console.log("Error Occured");
       }
     )
+  }
+
+  provechange():void{
+    alert(this.newPatient.Gender);
   }
 }

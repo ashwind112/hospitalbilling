@@ -1,5 +1,5 @@
 
-<ngb-alert *ngIf="alert" [type]="alert.type">{{ alert.message }}</ngb-alert>
+<ngb-alert *ngIf="!closed" [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 
 <table class="table">
     <thead class="thead-light">
