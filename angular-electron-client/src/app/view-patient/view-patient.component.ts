@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ViewPatientComponent implements OnInit {
   selectedPatient: Patient;
+  diagnosis: string;
+  treatement: string;
   displayPatient: Patient = new Patient();
 
   constructor(private patientUtilityService: PatientUtilityService) { }
@@ -23,6 +25,9 @@ export class ViewPatientComponent implements OnInit {
 
   selectedItem(item) {
     this.displayPatient = item.item;
+    this.diagnosis = this.displayPatient.Diagnosis.pop().AdmittedFor;
+    this.treatement = this.displayPatient.Treatment.pop().TreatmentGiven;
+    console.log("From DB: ");
     console.log(this.displayPatient);
   }
   patientResultFormatter = (result: Patient) => result.FirstName + ' ' + result.MiddleName + ' ' + result.LastName;

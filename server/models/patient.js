@@ -22,7 +22,7 @@ const PatientSchema = new Schema({
         type:String,
         default:"None"
     },
-    AdmitedFor:[{
+    Diagnosis:[{
         AdmittedFor:{
             type : String,
         },

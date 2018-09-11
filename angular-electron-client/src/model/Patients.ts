@@ -1,14 +1,14 @@
-class AdmitionInfo {
-  AddmitedFor: string;
+export class AdmitionInfo {
+  AdmittedFor: string;
   AdmittedOn: Date;
 
   constructor() {
-    this.AddmitedFor = "";
+    this.AdmittedFor = "";
   }
 
 }
 
-class TreatmentInfo {
+export class TreatmentInfo {
   TreatmentGiven: string;
   TreatmentGivenOn: Date;
 
@@ -28,7 +28,7 @@ export class Patient {
   DatesOfAdmission: Date[];
   DatesOfDischarge: Date[];
   HistoryOf: string;
-  AdmitedFor: AdmitionInfo[];
+  Diagnosis: AdmitionInfo[];
   Treatment: TreatmentInfo[];
   PhoneNumber: string;
   IsAdmitted: boolean;
@@ -43,7 +43,7 @@ export class Patient {
     this.DatesOfAdmission = [];
     this.DatesOfDischarge = [];
     this.HistoryOf = "";
-    this.AdmitedFor = new Array();
+    this.Diagnosis = new Array();
     this.Treatment = new Array();
     this.PhoneNumber = "";
     this.IsAdmitted = false;

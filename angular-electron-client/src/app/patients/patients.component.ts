@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {Patient} from '../../model/Patients';
+import {Patient, AdmitionInfo, TreatmentInfo} from '../../model/Patients';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {PatientUtilityService} from '../patient-utility.service';
@@ -13,7 +13,9 @@ import {PatientUtilityService} from '../patient-utility.service';
 export class PatientsComponent implements OnInit {
 
   newPatient:Patient;
-  patientsData:Patient[];
+  patientsData: Patient[];
+  diagnosis: string;
+  treatement: string;
 
   constructor(private patientUtilityService:PatientUtilityService ) { }
 
@@ -29,6 +31,22 @@ export class PatientsComponent implements OnInit {
   addPatientToDB():void{
     this.newPatient.DatesOfAdmission.push(new Date());
     this.newPatient.IsAdmitted = true;
+
+    let adInfo = new  AdmitionInfo();
+    let tInfo = new TreatmentInfo();
+
+    adInfo.AdmittedOn = new Date();
+    if (this.diagnosis.length != 0)
+      adInfo.AdmittedFor = this.diagnosis;
+
+    tInfo.TreatmentGivenOn = new Date();
+    if (this.treatement.length != 0)
+      tInfo.TreatmentGiven = this.treatement;
+
+    this.newPatient.Diagnosis.push(adInfo);
+    this.newPatient.Treatment.push(tInfo);
+ 
+    console.log("Going to DB:");
     console.log(this.newPatient);
     this.patientUtilityService.addPatient(this.newPatient).subscribe(
       res =>{
