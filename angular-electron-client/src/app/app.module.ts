@@ -9,6 +9,7 @@ import { PatientsComponent } from './patients/patients.component';
 import { AdmittedPatientsComponent } from './admitted-patients/admitted-patients.component';
 import { ViewPatientComponent } from './view-patient/view-patient.component';
 import {PatientUtilityService} from './patient-utility.service';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -16,12 +17,14 @@ import {PatientUtilityService} from './patient-utility.service';
     PatientsComponent,
     AdmittedPatientsComponent,
     ViewPatientComponent
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     NgbModule.forRoot(),
-    FormsModule
+    FormsModule,
+    NgxSpinnerModule
   ],
   providers: [PatientUtilityService],
   bootstrap: [AppComponent]

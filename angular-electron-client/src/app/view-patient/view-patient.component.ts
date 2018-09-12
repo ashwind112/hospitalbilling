@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Patient} from '../../model/Patients';
+import { Patient } from '../../model/Patients';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PatientUtilityService } from '../patient-utility.service';
 import * as moment from "moment";
 import { Observable } from 'rxjs/Observable';
@@ -19,21 +20,26 @@ export class ViewPatientComponent implements OnInit {
   treatement: string;
   latestAdmissinDate: string;
   latestDischargeDate: string;
-
+  male: boolean;
+  female: boolean;
   displayPatient: Patient = new Patient();
   
-  constructor(private patientUtilityService: PatientUtilityService) { }
+  constructor(private patientUtilityService: PatientUtilityService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-
+    
   }
 
   selectedItem(item) {
 
     this.displayPatient = item.item;
-    this.diagnosis = this.displayPatient.Diagnosis.pop().AdmittedFor;
-    this.treatement = this.displayPatient.Treatment.pop().TreatmentGiven;
+    this.diagnosis = this.displayPatient.Diagnosis[this.displayPatient.Diagnosis.length - 1].AdmittedFor;
+    this.treatement = this.displayPatient.Treatment[this.displayPatient.Treatment.length - 1].TreatmentGiven;
 
+    if (this.displayPatient.Gender == "Male")
+      this.male = true;
+    else
+      this.female = true;
     if (this.displayPatient.DatesOfAdmission.length != 0)
       this.latestAdmissinDate = moment(this.displayPatient.DatesOfAdmission[this.displayPatient.DatesOfAdmission.length - 1]).format("DD/MM/YYYY");
 
@@ -57,6 +63,25 @@ export class ViewPatientComponent implements OnInit {
         return patients.map((patient) => term = patient);
       }));
   }
+
+  updatePatientToDB() {
+    console.log("Before Update:");
+    console.log(this.displayPatient);
+    this.spinner.show();
+    
+    this.patientUtilityService.updatePatient(this.displayPatient._id.toString(), this.displayPatient).subscribe(
+      res => {
+        this.spinner.hide();
+        console.log(res);
+      },
+      err => {
+        console.log(err);
+      }
+    );
+    return;
+  }
+
+
 
 }
 
