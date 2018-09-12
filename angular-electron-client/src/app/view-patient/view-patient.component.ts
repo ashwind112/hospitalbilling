@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Patient} from '../../model/Patients';
-import {PatientUtilityService} from '../patient-utility.service';
-
+import { PatientUtilityService } from '../patient-utility.service';
+import * as moment from "moment";
 import { Observable } from 'rxjs/Observable';
 
 
@@ -12,11 +12,16 @@ import { Observable } from 'rxjs/Observable';
   styleUrls: ['./view-patient.component.css']
 })
 export class ViewPatientComponent implements OnInit {
+
+  //To show on forms
   selectedPatient: Patient;
   diagnosis: string;
   treatement: string;
-  displayPatient: Patient = new Patient();
+  latestAdmissinDate: string;
+  latestDischargeDate: string;
 
+  displayPatient: Patient = new Patient();
+  
   constructor(private patientUtilityService: PatientUtilityService) { }
 
   ngOnInit() {
@@ -24,9 +29,19 @@ export class ViewPatientComponent implements OnInit {
   }
 
   selectedItem(item) {
+
     this.displayPatient = item.item;
     this.diagnosis = this.displayPatient.Diagnosis.pop().AdmittedFor;
     this.treatement = this.displayPatient.Treatment.pop().TreatmentGiven;
+
+    if (this.displayPatient.DatesOfAdmission.length != 0)
+      this.latestAdmissinDate = moment(this.displayPatient.DatesOfAdmission[this.displayPatient.DatesOfAdmission.length - 1]).format("DD/MM/YYYY");
+
+    if (this.displayPatient.DatesOfDischarge.length != 0)
+      this.latestDischargeDate = moment(this.displayPatient.DatesOfDischarge[this.displayPatient.DatesOfDischarge.length - 1]).format("DD/MM/YYYY");
+    else
+      this.latestDischargeDate = "NA";
+
     console.log("From DB: ");
     console.log(this.displayPatient);
   }

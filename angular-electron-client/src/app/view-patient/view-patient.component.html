@@ -35,16 +35,16 @@
           <label for="patientAge">Phone number</label>
           <input type="tel" class="form-control" placeholder="Phone number" [(ngModel)]="displayPatient.PhoneNumber" name="PhoneNumber">
         </div>
-        <!--Drop Down for date of admissions-->
 
+        <!--Drop Down for date of admissions-->
         <div class="form-group col-md-3">
             <div ngbDropdown class="d-inline-block">
               <label for="dropdownBasic1">Date Of Admission</label>
-              <button type="button" class="btn btn-primary" dis>Latest Date</button>
+              <button type="button" class="btn btn-primary" dis>{{latestAdmissinDate}}</button>
               <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
                 <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
                 <div class="dropdown-menu"  ngbDropdownMenu>
-                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfAdmission">{{doa}}</button>
+                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfAdmission">{{doa | date:'dd/MM/yyyy'}}</button>
                 </div>
               </div>
             </div>
@@ -54,11 +54,11 @@
         <div class="form-group col-md-3">
             <div ngbDropdown class="d-inline-block">
               <label for="dropdownBasic2">Date Of Discharge</label>
-              <button type="button" class="btn btn-primary" dis>Latest Date</button>
+              <button type="button" class="btn btn-primary" dis>{{latestDischargeDate}}</button>
               <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
                 <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
                 <div class="dropdown-menu"  ngbDropdownMenu>
-                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge" >{{doa}}</button>
+                  <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge">{{doa | date:'dd/MM/yyyy'}}</button>
                 </div>
               </div>
             </div>
