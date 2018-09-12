@@ -8,3 +8,4 @@ server/.vs/server1/v15/.suo
 server/server.njsproj
 server/server1.njsproj
 server/server1.sln
+angular-electron-client/package-lock.json
