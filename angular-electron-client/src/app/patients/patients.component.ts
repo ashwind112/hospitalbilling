@@ -4,6 +4,7 @@ import {Patient, AdmitionInfo, TreatmentInfo} from '../../model/Patients';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import {PatientUtilityService} from '../patient-utility.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-patients',
@@ -16,15 +17,28 @@ export class PatientsComponent implements OnInit {
   patientsData: Patient[];
   diagnosis: string;
   treatement: string;
+  patientForm: FormGroup;
 
   constructor(private patientUtilityService:PatientUtilityService ) { }
 
   ngOnInit() {
+    
+
     this.newPatient = new Patient();
 
     this.patientUtilityService.getPatients().subscribe((patients) => {
       this.patientsData = patients
-    } );
+    });
+
+    this.patientForm = new FormGroup({
+      'FirstName': new FormControl(this.newPatient.FirstName, [Validators.required]),
+      'MiddleName': new FormControl(this.newPatient.MiddleName, [Validators.required]),
+      'LastName': new FormControl(this.newPatient.LastName, [Validators.required]),
+      'Gender': new FormControl(this.newPatient.Gender, [Validators.required]),
+      'Age': new FormControl(this.newPatient.Age, [Validators.required, Validators.min(1)]),
+      'Address': new FormControl(this.newPatient.Address, [Validators.required])
+    });
+  
 
   }
 
@@ -61,4 +75,6 @@ export class PatientsComponent implements OnInit {
   provechange():void{
     alert(this.newPatient.Gender);
   }
+
+  get diagnostic() { return JSON.stringify(this.newPatient); }
 }

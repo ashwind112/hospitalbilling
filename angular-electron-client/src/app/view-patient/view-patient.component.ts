@@ -4,6 +4,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { PatientUtilityService } from '../patient-utility.service';
 import * as moment from "moment";
 import { Observable } from 'rxjs/Observable';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 
@@ -23,11 +24,19 @@ export class ViewPatientComponent implements OnInit {
   male: boolean;
   female: boolean;
   displayPatient: Patient = new Patient();
+  patientForm: FormGroup;
   
   constructor(private patientUtilityService: PatientUtilityService, private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    
+    this.patientForm = new FormGroup({
+      'FirstName': new FormControl(this.displayPatient.FirstName, [Validators.required]),
+      'LastName': new FormControl(this.displayPatient.LastName, [Validators.required]),
+      'MiddleName': new FormControl(this.displayPatient.MiddleName, [Validators.required]),
+      'Gender': new FormControl(this.displayPatient.Gender, [Validators.required]),
+      'Age': new FormControl(this.displayPatient.Age, [Validators.required]),
+      'Address': new FormControl(this.displayPatient.Address, [Validators.required])
+    });
   }
 
   selectedItem(item) {

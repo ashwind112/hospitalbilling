@@ -17,7 +17,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" placeholder="First name" [(ngModel)]="displayPatient.FirstName" name="FirstName">
+        <input type="text" class="form-control" placeholder="First name" [(ngModel)]="displayPatient.FirstName" required name="FirstName">
       </div>
       <div class="form-group col-md-4">
         <input type="text" class="form-control" placeholder="Middle name" [(ngModel)]="displayPatient.MiddleName" name="MiddleName">
@@ -105,7 +105,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">History Of </span>
         </div>
-        <textarea class="form-control" col="90" row="2" [(ngModel)]="displayPatient.HistoryOf" name="HistoryOf"></textarea>
+        <textarea class="form-control" col="90" rows="2" [(ngModel)]="displayPatient.HistoryOf" name="HistoryOf"></textarea>
       </div>
     </div>
     <div class="form-row">
@@ -113,8 +113,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Diagnosis</span>
         </div>
-        <textarea class="form-control" col="90" row="4" *ngIf="displayPatient.Diagnosis.length == 0" name="AdmitedFor"></textarea>
-        <textarea class="form-control" col="90" row="4" *ngIf="displayPatient.Diagnosis.length != 0"
+        <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length == 0" name="AdmitedFor"></textarea>
+        <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length != 0"
                   [(ngModel)]="displayPatient.Diagnosis[this.displayPatient.Diagnosis.length - 1].AdmittedFor" name="AdmitedFor"></textarea>
       </div>
     </div>
@@ -124,8 +124,8 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Treatment</span>
         </div>
-        <textarea class="form-control" col="90" row="8" *ngIf="displayPatient.Treatment.length == 0" name="AdmitedFor"></textarea>
-        <textarea class="form-control" col="90" row="8" *ngIf="displayPatient.Treatment.length !=0"
+        <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length == 0" name="AdmitedFor"></textarea>
+        <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length !=0"
                   [(ngModel)]="displayPatient.Treatment[this.displayPatient.Treatment.length - 1].TreatmentGiven" name="Treatment"></textarea>
       </div>
     </div>

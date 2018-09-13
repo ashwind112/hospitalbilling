@@ -1,52 +1,70 @@
 <div class="container-fluid">
-  <form>
+
+  <form #patientForm="ngForm">
     <div class="form-row">
       <label>Patient Name:</label>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" [(ngModel)]= "newPatient.FirstName" name = "FirstName" placeholder="First name" required>
+        <input type="text" class="form-control" [(ngModel)]="newPatient.FirstName" #firstname="ngModel" required
+               name="FirstName" placeholder="First name">
 
+        <div [hidden]="firstname.valid || firstname.pristine"
+             class="alert alert-danger">
+          First Name is required
+        </div>
       </div>
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" [(ngModel)]= "newPatient.MiddleName"
-        name = "MiddleName" placeholder="Middle name">
+        <input type="text" class="form-control" [(ngModel)]="newPatient.MiddleName" #middlename="ngModel"
+               name="MiddleName" #MiddleName="ngModel" placeholder="Middle name" required>
 
+        <div [hidden]="middlename.valid || middlename.pristine"
+             class="alert alert-danger">
+          Middle Name is required
+        </div>
       </div>
       <div class="form-group col-md-4">
-        <input type="text" class="form-control" [(ngModel)]= "newPatient.LastName"
-        name = "LastName" placeholder="Last name" required>
+        <input type="text" class="form-control" [(ngModel)]="newPatient.LastName" #lastname="ngModel"
+               name="LastName" placeholder="Last name" #LastName="ngModel" required>
 
+        <div [hidden]="lastname.valid || lastname.pristine"
+             class="alert alert-danger">
+          Last Name is required
+        </div>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-2">
         <label for="patientAge">Age</label>
-        <input type="number" id="patientAge" class="form-control" [(ngModel)]= "newPatient.Age"
-        name = "Age" placeholder="Age" required>
+        <input type="number" id="patientAge" class="form-control" [(ngModel)]="newPatient.Age" #age="ngModel"
+               name="Age"  placeholder="Age" required min="1">
 
+        <div [hidden]="age.valid || age.pristine"
+             class="alert alert-danger">
+          Age is required
+        </div>
       </div>
       <div class="form-group col-md-4">
         <label for="patientAge">Phone number</label>
-        <input type="tel" class="form-control" [(ngModel)]= "newPatient.PhoneNumber"
-        name = "PhoneNumber" placeholder="Phone number" required>
+        <input type="tel" class="form-control" [(ngModel)]="newPatient.PhoneNumber"
+               name="PhoneNumber" placeholder="Phone number" required>
 
       </div>
       <div class="form-group col-md-4">
-        <label > Gender </label>
+        <label> Gender </label>
         <div class="input-group">
 
           <div class="form-check">
 
             <input class="form-check-input" type="radio" name="maleRadio" id="Male" value="Male"
-                   [(ngModel)] = "newPatient.Gender">
+                   [(ngModel)]="newPatient.Gender">
             <label class="form-check-label" for="Male">Male</label>
           </div>
           <hr>
           <div class="form-check">
 
             <input class="form-check-input" type="radio" name="femaleRadio" id="Female" value="Female"
-                   [(ngModel)] = "newPatient.Gender">
+                   [(ngModel)]="newPatient.Gender">
             <label class="form-check-label" for="Female">Female</label>
 
           </div>
@@ -58,7 +76,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Address</span>
         </div>
-        <textarea class="form-control" col="90" row="10" [(ngModel)]= "newPatient.Address" name = "Address" required></textarea>
+        <textarea class="form-control" col="90" row="10" [(ngModel)]="newPatient.Address" name="Address" required></textarea>
       </div>
     </div>
     <hr>
@@ -70,7 +88,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">History Of </span>
         </div>
-        <textarea class="form-control" col="90" rows="2" [(ngModel)]= "newPatient.HistoryOf" name = "HistoryOf"></textarea>
+        <textarea class="form-control" col="90" rows="2" [(ngModel)]="newPatient.HistoryOf" name="HistoryOf"></textarea>
       </div>
     </div>
     <div class="form-row">
@@ -78,7 +96,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Diagnosis</span>
         </div>
-        <textarea class="form-control" col="90" rows="2" [(ngModel)]= "diagnosis" name = "AdmitedFor"></textarea>
+        <textarea class="form-control" col="90" rows="2" [(ngModel)]="diagnosis" name="AdmitedFor"></textarea>
       </div>
     </div>
     <div class="form-row">
@@ -86,12 +104,12 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Treatment</span>
         </div>
-        <textarea class="form-control" col="90" rows="5" [(ngModel)]= "treatement" name = "Treatment" ></textarea>
+        <textarea class="form-control" col="90" rows="5" [(ngModel)]="treatement" name="Treatment"></textarea>
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-4">
-        <button type="button" class="form-control btn btn-primary" (click) = "addPatientToDB()" >ADMIT PATIENT</button>
+        <button type="submit" class="form-control btn btn-primary" (click)="addPatientToDB()">ADMIT PATIENT</button>
       </div>
     </div>
   </form>
