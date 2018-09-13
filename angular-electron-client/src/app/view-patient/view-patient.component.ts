@@ -77,17 +77,19 @@ export class ViewPatientComponent implements OnInit {
     console.log("Before Update:");
     console.log(this.displayPatient);
     this.spinner.show();
-    
+
     this.patientUtilityService.updatePatient(this.displayPatient._id.toString(), this.displayPatient).subscribe(
       res => {
         this.spinner.hide();
-        console.log(res);
+        this.displayPatient = res;
+        return;
       },
       err => {
+        
         console.log(err);
+        return;
       }
     );
-    return;
   }
 
 

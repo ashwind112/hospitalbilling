@@ -9,3 +9,5 @@ server/server.njsproj
 server/server1.njsproj
 server/server1.sln
 angular-electron-client/package-lock.json
+angular-electron-client/release-builds/
+angular-electron-client/dist/

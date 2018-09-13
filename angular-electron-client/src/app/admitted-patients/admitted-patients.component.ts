@@ -39,11 +39,11 @@ export class AdmittedPatientsComponent implements OnInit {
 
   }
 
-  dischargePatient(patient):void {
+  dischargePatient(patientToDischarge: Patient): void {
 
 
-    if ( patient.HistoryOf.length === 0 || patient.Treatment.TreatmentGiven.length === 0 ||
-        patient.AdmitedFor.AddmitedFor.length === 0)
+    if (patientToDischarge.HistoryOf.length === 0 || patientToDischarge.Treatment[patientToDischarge.Treatment.length - 1].TreatmentGiven.length === 0 ||
+      patientToDischarge.Diagnosis[patientToDischarge.Diagnosis.length - 1].AdmittedFor.length === 0)
     {
       if(this.closed)
         this.closed = false;
@@ -52,13 +52,14 @@ export class AdmittedPatientsComponent implements OnInit {
       return;
     }
     else {
-      patient.IsAdmitted = false;
-      this.patientUtilityService.updatePatient(patient._id, patient).subscribe((patientUpdated) => {
+      patientToDischarge.IsAdmitted = false;
+      patientToDischarge.DatesOfDischarge.push(new Date());
+      this.patientUtilityService.updatePatient(patientToDischarge._id.toString(), patientToDischarge).subscribe((patientUpdated) => {
         if (patientUpdated) {
           console.log('patient discharged' + patientUpdated);
         }
       });
-      console.log(patient);
+      console.log(patientToDischarge);
     }
   }
 

@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Patient, AdmitionInfo, TreatmentInfo} from '../../model/Patients';
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import {PatientUtilityService} from '../patient-utility.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 

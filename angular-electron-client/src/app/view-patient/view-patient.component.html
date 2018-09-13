@@ -58,7 +58,7 @@
           <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
             <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" [ngIf]="displayPatient.DatesOfDischarge.length != 0" *ngFor="let doa of displayPatient.DatesOfDischarge">{{doa | date:'dd/MM/yyyy'}}</button>
+              <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge">{{doa | date:'dd/MM/yyyy'}}</button>
             </div>
           </div>
         </div>
@@ -136,7 +136,8 @@
       </div>
 
       <div class="form-group col-md-4">
-        <input type="button" class="form-control btn btn-primary" (click)="updatePatientToDB()" name="name" value="UPDATE PATIENT" />
+        <input type="submit" class="form-control btn btn-primary" (click)="updatePatientToDB()" name="name" value="UPDATE PATIENT" />
+        
       </div>
 
     </div>
