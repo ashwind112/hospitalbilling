@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Patient } from '../../model/Patients';
+import {Patient, AdmitionInfo, TreatmentInfo} from '../../model/Patients';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { PatientUtilityService } from '../patient-utility.service';
 import * as moment from "moment";
@@ -92,7 +92,31 @@ export class ViewPatientComponent implements OnInit {
     );
   }
 
+  admitPatientToDB(){
+	  this.displayPatient.DatesOfAdmission.push(new Date());
+	  this.displayPatient.IsAdmitted = true;
+	  
+	  let adInfo = new  AdmitionInfo();
+    let tInfo = new TreatmentInfo();
 
+    adInfo.AdmittedOn = new Date();
+    adInfo.AdmittedFor = "";
+
+    tInfo.TreatmentGivenOn = new Date();
+    tInfo.TreatmentGiven = "";
+	
+	this.displayPatient.Diagnosis.push(adInfo);
+    this.displayPatient.Treatment.push(tInfo);
+	
+	this.patientUtilityService.updatePatient(this.displayPatient._id.toString(), this.displayPatient).subscribe(
+      res =>{
+        console.log(res);
+      },
+      err =>{
+        console.log("Error Occured");
+      }
+    )
+  }
 
 }
 

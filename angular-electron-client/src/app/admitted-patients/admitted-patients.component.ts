@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PatientUtilityService} from '../patient-utility.service';
 import {Patient} from '../../model/Patients';
 import {and} from '@angular/router/src/utils/collection';
@@ -16,8 +16,12 @@ export class AdmittedPatientsComponent implements OnInit {
   closed:boolean;
   public alerts: Array<IAlert> = [];
   interval: any;
+  optionsToDischarge = ["Discharge","DOR","DAMA","RHC"];
+  dischargeSelection:string ="";
+  closeResult:any;
+  private modalRef: NgbModalRef;
 
-  constructor(private patientUtilityService: PatientUtilityService) { }
+  constructor(private patientUtilityService: PatientUtilityService,private modalService: NgbModal) { }
 
   ngOnInit() {
     this.closed = true;
@@ -39,6 +43,26 @@ export class AdmittedPatientsComponent implements OnInit {
 
   }
 
+  open(content) {
+	this.modalRef = this.modalService.open(content);  
+    this.modalRef.result.then((result) => {
+      this.closeResult = 'Closed with: ${result}';
+    }, (reason) => {
+      this.closeResult = 'Dismissed ${this.getDismissReason(reason)}';
+    });
+  }
+  
+    private getDismissReason(reason: any): string {
+		
+		if (reason === ModalDismissReasons.ESC) {
+		  return 'by pressing ESC';
+		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+		  return 'by clicking on a backdrop';
+		} else {
+		  return  'with: ${reason}';
+		}
+	}
+  
   dischargePatient(patientToDischarge: Patient): void {
 
 
@@ -47,7 +71,6 @@ export class AdmittedPatientsComponent implements OnInit {
     {
       if(this.closed)
         this.closed = false;
-      alert("Failed to update");
       this.alert=this.alerts[1];
       return;
     }
@@ -72,6 +95,10 @@ export class AdmittedPatientsComponent implements OnInit {
     this.patientUtilityService.getAdmittedPatients().subscribe((patients) => {
       this.admittedPatients = patients;
     });
+  }
+  
+  selectionChanged(option: string){
+	this.dischargeSelection = option;
   }
 
 }
