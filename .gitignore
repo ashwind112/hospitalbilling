@@ -1,4 +1,3 @@
-
 angular-electron-client/.vs/angular-electron-client/v15/.suo
 angular-electron-client/.vs/config/applicationhost.config
 angular-electron-client/.vs/ProjectSettings.json
@@ -10,3 +9,6 @@ server/server1.njsproj
 server/server1.sln
 angular-electron-client/package-lock.json
 angular-electron-client/dist/
+/server/node_modules/
+/angular-electron-client/node_modules/
+
