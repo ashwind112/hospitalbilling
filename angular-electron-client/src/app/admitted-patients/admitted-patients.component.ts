@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons,NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {PatientUtilityService} from '../patient-utility.service';
-import {Patient} from '../../model/Patients';
+import {Patient,DischargeInfo} from '../../model/Patients';
 import {and} from '@angular/router/src/utils/collection';
 
 @Component({
@@ -19,6 +19,7 @@ export class AdmittedPatientsComponent implements OnInit {
   optionsToDischarge = ["Discharge","DOR","DAMA","RHC"];
   dischargeSelection:string ="";
   closeResult:any;
+  tod:DischargeInfo;
   private modalRef: NgbModalRef;
 
   constructor(private patientUtilityService: PatientUtilityService,private modalService: NgbModal) { }
@@ -43,17 +44,23 @@ export class AdmittedPatientsComponent implements OnInit {
 
   }
 
-  open(content) {
-	this.modalRef = this.modalService.open(content);  
+  open(content,patient) {
+    console.log(content);
+    console.log(patient);
+	this.modalRef = this.modalService.open(content);
     this.modalRef.result.then((result) => {
       this.closeResult = 'Closed with: ${result}';
+      console.log(this.closeResult)
+      this.dischargePatient(patient)
     }, (reason) => {
       this.closeResult = 'Dismissed ${this.getDismissReason(reason)}';
+      console.log(this.closeResult)
     });
+
   }
-  
+
     private getDismissReason(reason: any): string {
-		
+
 		if (reason === ModalDismissReasons.ESC) {
 		  return 'by pressing ESC';
 		} else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -62,10 +69,10 @@ export class AdmittedPatientsComponent implements OnInit {
 		  return  'with: ${reason}';
 		}
 	}
-  
+
   dischargePatient(patientToDischarge: Patient): void {
 
-
+    console.log(patientToDischarge)
     if (patientToDischarge.HistoryOf.length === 0 || patientToDischarge.Treatment[patientToDischarge.Treatment.length - 1].TreatmentGiven.length === 0 ||
       patientToDischarge.Diagnosis[patientToDischarge.Diagnosis.length - 1].AdmittedFor.length === 0)
     {
@@ -77,6 +84,11 @@ export class AdmittedPatientsComponent implements OnInit {
     else {
       patientToDischarge.IsAdmitted = false;
       patientToDischarge.DatesOfDischarge.push(new Date());
+      this.tod=new DischargeInfo();
+      this.tod.TypeOfDischarge=this.dischargeSelection;
+      this.tod.DischargeDate=new Date();
+      console.log(this.tod)
+      patientToDischarge.Discharge.push(this.tod);
       this.patientUtilityService.updatePatient(patientToDischarge._id.toString(), patientToDischarge).subscribe((patientUpdated) => {
         if (patientUpdated) {
           console.log('patient discharged' + patientUpdated);
@@ -96,7 +108,7 @@ export class AdmittedPatientsComponent implements OnInit {
       this.admittedPatients = patients;
     });
   }
-  
+
   selectionChanged(option: string){
 	this.dischargeSelection = option;
   }

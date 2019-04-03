@@ -40,6 +40,14 @@ const PatientSchema = new Schema({
             type:Date,
         }
     }],
+    Discharge:[{
+      TypeOfDischarge:{
+        type:String
+      },
+      DischargeDate:{
+        type:Date
+      }
+    }],
     PhoneNumber:{
         type:String,
         required:[true,'Must have a phone number']

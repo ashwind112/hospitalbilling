@@ -19,7 +19,7 @@ export class PatientsComponent implements OnInit {
   constructor(private patientUtilityService:PatientUtilityService ) { }
 
   ngOnInit() {
-    
+
 
     this.newPatient = new Patient();
 
@@ -35,7 +35,7 @@ export class PatientsComponent implements OnInit {
       'Age': new FormControl(this.newPatient.Age, [Validators.required, Validators.min(1)]),
       'Address': new FormControl(this.newPatient.Address, [Validators.required])
     });
-  
+
 
   }
 
@@ -45,6 +45,7 @@ export class PatientsComponent implements OnInit {
 
     let adInfo = new  AdmitionInfo();
     let tInfo = new TreatmentInfo();
+    
 
     adInfo.AdmittedOn = new Date();
     if (this.diagnosis.length != 0)
@@ -56,7 +57,7 @@ export class PatientsComponent implements OnInit {
 
     this.newPatient.Diagnosis.push(adInfo);
     this.newPatient.Treatment.push(tInfo);
- 
+
     console.log("Going to DB:");
     console.log(this.newPatient);
     this.patientUtilityService.addPatient(this.newPatient).subscribe(

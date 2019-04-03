@@ -8,6 +8,16 @@ export class AdmitionInfo {
 
 }
 
+export class DischargeInfo {
+  TypeOfDischarge: string;
+  DischargeDate: Date;
+
+  constructor() {
+    this.TypeOfDischarge = "Discharge";
+  }
+
+}
+
 export class TreatmentInfo {
   TreatmentGiven: string;
   TreatmentGivenOn: Date;
@@ -30,6 +40,7 @@ export class Patient {
   HistoryOf: string;
   Diagnosis: AdmitionInfo[];
   Treatment: TreatmentInfo[];
+  Discharge: DischargeInfo[];
   PhoneNumber: string;
   IsAdmitted: boolean;
   Age: number;
@@ -45,6 +56,7 @@ export class Patient {
     this.HistoryOf = "";
     this.Diagnosis = new Array();
     this.Treatment = new Array();
+    this.Discharge = new Array();
     this.PhoneNumber = "";
     this.IsAdmitted = false;
     this.Age = 0;
