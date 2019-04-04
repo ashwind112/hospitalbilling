@@ -1,3 +1,19 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="modal-basic-title">ERROR!!!</h5>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5> The Patient is already admitted.</h5>
+    <h5> Please Discharge this patient first.</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modalRef.close('Save click')">Close</button>
+  </div>
+</ng-template>
+
 <div class="container-fluid">
   <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
   <form>
@@ -44,7 +60,7 @@
           <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
             <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfAdmission">{{doa | date:"dd/MM/yyyy hh:mm a" }}</button>
+              <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfAdmission" (click)="dateOfAdmissionSelected(doa)">{{doa | date:"dd/MM/yyyy hh:mm a" }}</button>
             </div>
           </div>
         </div>
@@ -115,7 +131,7 @@
         </div>
         <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length == 0" name="AdmitedFor"></textarea>
         <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length != 0"
-                  [(ngModel)]="displayPatient.Diagnosis[this.displayPatient.Diagnosis.length - 1].AdmittedFor" name="AdmitedFor"></textarea>
+                  [(ngModel)]="treatement" name="AdmitedFor"></textarea>
       </div>
     </div>
 
@@ -126,18 +142,18 @@
         </div>
         <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length == 0" name="AdmitedFor"></textarea>
         <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length !=0"
-                  [(ngModel)]="displayPatient.Treatment[this.displayPatient.Treatment.length - 1].TreatmentGiven" name="Treatment"></textarea>
+                  [(ngModel)]="diagnosis" name="Treatment"></textarea>
       </div>
     </div>
     <div class="form-row">
 
       <div class="form-group col-md-4">
-        <button type="button" class="form-control btn btn-primary" (click)="admitPatientToDB()">ADMIT PATIENT</button>
+        <button type="button" class="form-control btn btn-primary" (click)="admitPatientToDB(content)">ADMIT PATIENT</button>
       </div>
 
       <div class="form-group col-md-4">
         <input type="submit" class="form-control btn btn-primary" (click)="updatePatientToDB()" name="name" value="UPDATE PATIENT" />
-        
+
       </div>
 
     </div>

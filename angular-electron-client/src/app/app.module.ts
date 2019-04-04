@@ -10,13 +10,15 @@ import { AdmittedPatientsComponent } from './admitted-patients/admitted-patients
 import { ViewPatientComponent } from './view-patient/view-patient.component';
 import {PatientUtilityService} from './patient-utility.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PatientBillingComponent } from './patient-billing/patient-billing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PatientsComponent,
     AdmittedPatientsComponent,
-    ViewPatientComponent
+    ViewPatientComponent,
+    PatientBillingComponent
     
   ],
   imports: [
