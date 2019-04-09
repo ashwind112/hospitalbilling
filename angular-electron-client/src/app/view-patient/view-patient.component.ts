@@ -18,6 +18,7 @@ export class ViewPatientComponent implements OnInit {
 
   //To show on forms
   selectedPatient: Patient;
+  selectedDateOfAdmission:Date ;
   diagnosis: string ="";
   treatement: string= "";
   latestAdmissinDate: string;
@@ -53,12 +54,19 @@ export class ViewPatientComponent implements OnInit {
     else
       this.female = true;
     if (this.displayPatient.DatesOfAdmission.length != 0)
+    {
       this.latestAdmissinDate = moment(this.displayPatient.DatesOfAdmission[this.displayPatient.DatesOfAdmission.length - 1]).format("DD/MM/YYYY");
+      this.selectedDateOfAdmission= this.displayPatient.DatesOfAdmission[this.displayPatient.DatesOfAdmission.length - 1];
+    }
 
     if (this.displayPatient.DatesOfDischarge.length != 0)
+    {
       this.latestDischargeDate = moment(this.displayPatient.DatesOfDischarge[this.displayPatient.DatesOfDischarge.length - 1]).format("DD/MM/YYYY");
+    }
     else
+    {
       this.latestDischargeDate = "NA";
+    }
 
     console.log("From DB: ");
     console.log(this.displayPatient);
@@ -80,6 +88,23 @@ export class ViewPatientComponent implements OnInit {
   updatePatientToDB() {
     console.log("Before Update:");
     console.log(this.displayPatient);
+    if(this.selectedDateOfAdmission)
+    {
+      this.displayPatient.Diagnosis.forEach(function(value){
+        if (this.selectedDateOfAdmission == value.AdmittedOn)
+        {
+          value.AdmittedFor=this.diagnosis;
+        }
+      }.bind(this));
+
+      this.displayPatient.Treatment.forEach(function(value){
+        if (this.selectedDateOfAdmission == value.TreatmentGivenOn)
+        {
+          value.TreatmentGiven=this.treatement;
+        }
+      }.bind(this));
+    }
+
     this.spinner.show();
 
     this.patientUtilityService.updatePatient(this.displayPatient._id.toString(), this.displayPatient).subscribe(
@@ -148,7 +173,7 @@ export class ViewPatientComponent implements OnInit {
 
   dateOfAdmissionSelected(doa:Date)
   {
-    alert("Called");
+    
     this.displayPatient.Diagnosis.forEach(function(value){
       if (doa == value.AdmittedOn)
       {
@@ -163,6 +188,11 @@ export class ViewPatientComponent implements OnInit {
       }
     }.bind(this));
 
+  }
+
+  dateOfDischargeSelected(doa:Date)
+  {
+    console.log("Callled");
   }
 
 

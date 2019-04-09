@@ -44,7 +44,7 @@
         <td> {{ patient.LastName }} </td>
         <td> {{ patient.DatesOfAdmission[patient.DatesOfAdmission.length-1] | date:"dd/MM/yyyy hh:mm a" }} </td>
         <td>
-            <a href="#" (click)="open(content,patient)">Discharge</a>
+            <button type="button" class="btn btn-light btn-sm" (click)="showOptions(content,patient)">Discharge</button>
         </td>
       </tr>
     </tbody>

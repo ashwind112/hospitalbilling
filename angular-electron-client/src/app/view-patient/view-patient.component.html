@@ -74,7 +74,7 @@
           <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
             <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
             <div class="dropdown-menu" ngbDropdownMenu>
-              <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge">{{doa | date:"dd/MM/yyyy hh:mm a" }}</button>
+              <button class="dropdown-item" *ngFor="let doa of displayPatient.DatesOfDischarge" (click)="dateOfDischargeSelected(doa)">{{doa | date:"dd/MM/yyyy hh:mm a" }}</button>
             </div>
           </div>
         </div>
@@ -131,7 +131,7 @@
         </div>
         <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length == 0" name="AdmitedFor"></textarea>
         <textarea class="form-control" col="90" rows="4" *ngIf="displayPatient.Diagnosis.length != 0"
-                  [(ngModel)]="treatement" name="AdmitedFor"></textarea>
+                  [(ngModel)]="diagnosis" name="AdmitedFor"></textarea>
       </div>
     </div>
 
@@ -142,7 +142,7 @@
         </div>
         <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length == 0" name="AdmitedFor"></textarea>
         <textarea class="form-control" col="90" rows="8" *ngIf="displayPatient.Treatment.length !=0"
-                  [(ngModel)]="diagnosis" name="Treatment"></textarea>
+                  [(ngModel)]="treatement" name="Treatment"></textarea>
       </div>
     </div>
     <div class="form-row">

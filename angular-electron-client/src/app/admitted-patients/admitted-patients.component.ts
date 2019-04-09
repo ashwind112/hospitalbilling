@@ -44,7 +44,7 @@ export class AdmittedPatientsComponent implements OnInit {
 
   }
 
-  open(content,patient) {
+  showOptions(content,patient) {
     console.log(content);
     console.log(patient);
 	this.modalRef = this.modalService.open(content);

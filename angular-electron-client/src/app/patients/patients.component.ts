@@ -45,14 +45,14 @@ export class PatientsComponent implements OnInit {
 
     let adInfo = new  AdmitionInfo();
     let tInfo = new TreatmentInfo();
-    
+
 
     adInfo.AdmittedOn = new Date();
-    if (this.diagnosis.length != 0)
+    if (this.diagnosis)
       adInfo.AdmittedFor = this.diagnosis;
 
     tInfo.TreatmentGivenOn = new Date();
-    if (this.treatement.length != 0)
+    if (this.treatement)
       tInfo.TreatmentGiven = this.treatement;
 
     this.newPatient.Diagnosis.push(adInfo);
